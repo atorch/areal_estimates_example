@@ -57,5 +57,13 @@ round(recall - recall_hat, 3)
 ## This perfectly recovers true_shares
 predicted_shares %*% recall_inverse
 
-## This has an error
+## This has an error  # TODO Could be interesting to look at its sampling distribution
 predicted_shares %*% solve(recall_hat)
+
+## Example of a recall matrix that is _not_ invertible
+recall_not_invertible <- rbind(c(0.88, 0.07, 0.05),
+                               c(0.88, 0.07, 0.05),
+			       c(0.01, 0.09, 0.90))
+solve(recall_not_invertible)
+eigen(recall_not_invertible)
+round(eigen(recall_not_invertible)$values, 5)
