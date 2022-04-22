@@ -33,6 +33,10 @@ data.frame(true_share=true_shares, predicted_share=predicted_shares)
 recall_inverse <- solve(recall)
 predicted_shares %*% recall_inverse
 
+## How do we know the recall matrix is invertible?
+## See https://en.wikipedia.org/wiki/Diagonally_dominant_matrix
+## Usually (but not always), the recall matrix is diagonally dominant
+
 ## Suppose instead that we need to estimate the recall matrix using a small test set
 n_test_obs <- 300
 test_set <- data.frame(true_class=sample(1:ncol(recall), size=n_test_obs, prob=true_shares, replace=TRUE))
